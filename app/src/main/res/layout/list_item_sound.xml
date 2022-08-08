@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.owl_laugh_at_wasted_time.beatbox.SoundViewModel"/>
+    </data>
+
     <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +17,7 @@
     <Button
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="Button"
+        android:text="@{viewModel.title}"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         tools:text="Sound name"/>
