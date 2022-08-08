@@ -18,6 +18,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:text="@{viewModel.title}"
+        android:onClick="@{()->viewModel.onButtonClicked()}"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         tools:text="Sound name"/>
