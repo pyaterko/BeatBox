@@ -1,5 +1,6 @@
 package com.owl_laugh_at_wasted_time.beatbox
 
+import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.media.SoundPool
 
@@ -17,7 +18,7 @@ class BeatBox(private val assets: AssetManager)
     init {
         sounds = loadSounds()
     }
-    fun loadSounds(): List<Sound> {
+   private fun loadSounds(): List<Sound> {
 
         val soundNames: Array<String>
         try {
@@ -32,6 +33,13 @@ class BeatBox(private val assets: AssetManager)
             sounds.add(sound)
         }
         return sounds
+    }
+
+    private fun load(sound: Sound) {
+        val afd: AssetFileDescriptor =
+            assets.openFd(sound.assetPath)
+        val soundId = soundPool.load(afd, 1)
+        sound.soundId = soundId
     }
 
 }
