@@ -1,13 +1,19 @@
 package com.owl_laugh_at_wasted_time.beatbox
 
 import android.content.res.AssetManager
+import android.media.SoundPool
 
 private const val SOUNDS_FOLDER = "sample_sounds"
+private const val MAX_SOUNDS = 5
 
 class BeatBox(private val assets: AssetManager)
 {
 
     val sounds: List<Sound>
+    private val soundPool = SoundPool.Builder()
+        .setMaxStreams(MAX_SOUNDS)
+        .build()
+
     init {
         sounds = loadSounds()
     }
