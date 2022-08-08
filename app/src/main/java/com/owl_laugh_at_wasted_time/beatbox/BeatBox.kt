@@ -3,9 +3,12 @@ package com.owl_laugh_at_wasted_time.beatbox
 import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.media.SoundPool
+import android.util.Log
+import java.io.IOException
 
 private const val SOUNDS_FOLDER = "sample_sounds"
 private const val MAX_SOUNDS = 5
+private const val TAG = "BeatBox"
 
 class BeatBox(private val assets: AssetManager)
 {
@@ -18,7 +21,8 @@ class BeatBox(private val assets: AssetManager)
     init {
         sounds = loadSounds()
     }
-   private fun loadSounds(): List<Sound> {
+
+    private  fun loadSounds(): List<Sound> {
 
         val soundNames: Array<String>
         try {
@@ -30,7 +34,12 @@ class BeatBox(private val assets: AssetManager)
         soundNames.forEach { filename ->
             val assetPath = "$SOUNDS_FOLDER/$filename"
             val sound = Sound(assetPath)
-            sounds.add(sound)
+            try {
+                load(sound)
+                sounds.add(sound)
+            } catch (ioe: IOException) {
+                Log.e(TAG, "Cound not load sound$filename", ioe)
+            }
         }
         return sounds
     }
